@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components
+@tailwind utilities
+
+step 12
+ npm install -D eslint
+ npm install -D prettier
+ npm install -D eslint-plugin-vue
+ npm install -D eslint-plugin-prettier
+ npm install -D eslint-config-prettier
+ npm install -D vite-plugin-eslint
+ npm install -D @typescript-eslint/eslint-plugin
+ npm install -D @typescript-eslint/parser
+ npm install -D @vue/eslint-config-prettier
+ npm install -D @vue/eslint-config-typescript

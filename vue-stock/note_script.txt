@@ -1,0 +1,204 @@
++++++++++++++++++++++++++++++++++++++
+| การสร้างโปรเจ็กต์ใหม่ 
+| Vue 3+ TypeScript + Vite 3 + Tailwind 3
++++++++++++++++++++++++++++++++++++++
+Step 1: Install Vite in Global
+---
+$ npm install -g vite
+
+Step 2: Create new Vite Project with Vue
+---
+$ npm create vite@latest
+or
+$ yarn create vite
+
+กำหนดชื่อโปรเจ็กต์เป็น "vue-stock"
+
+Step 3: เปิดโปรเจ็กต์เข้า VS Code
+---
+code vue-stock -r
+
+Step 4: Install node module in Vite Project
+---
+$ npm install
+
+Step 5: Run Project Vite with Vue
+---
+$ npm run dev
+
+or Run with host Project Vite with Vue
+---
+$ npm run dev --  --host
+
+Step 6: Install Tailwind CSS 3
+---
+$ npm install -D tailwindcss postcss autoprefixer
+
+Step 7: Generate Config Tailwind and PostCSS file
+---
+$ npx tailwindcss init -p
+
+Step 8: Config tailwind template paths
+---
+content: [
+    "./index.html",
+    "./src/**/*.{vue,js,ts,jsx,tsx}",
+  ],
+
+Step 9: Add Tailwind direactives to your CSS
+---
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+Step 10: Import tailwind css in main.ts
+---
+// Tailwind CSS
+import './tailwind/app.css'
+import './tailwind/custom.css'
+
+ทดสอบใช้ Tailwind
+<h1 className="text-3xl font-bold text-red-700">
+      Hello world!
+</h1>
+
+Step 11: Build and Run project
+---
+$ npm run dev
+
+Step 12: Install EsLint and Prettier
+---
+$ npm install -D eslint
+$ npm install -D prettier
+$ npm install -D eslint-plugin-vue
+$ npm install -D eslint-plugin-prettier
+$ npm install -D eslint-config-prettier
+$ npm install -D vite-plugin-eslint
+$ npm install -D @typescript-eslint/eslint-plugin
+$ npm install -D @typescript-eslint/parser
+$ npm install -D @vue/eslint-config-prettier
+$ npm install -D @vue/eslint-config-typescript
+
+
+Step 13: Create .eslintrc.json file
+---
+{
+    "root": true,
+    "globals": {
+        "defineProps": "readonly"
+    },
+    "env": {
+        "browser": true,
+        "es2021": true,
+        "node": true
+    },
+    "extends": [
+        "plugin:vue/vue3-recommended",
+        "eslint:recommended",
+        "@vue/typescript/recommended",
+        "prettier"
+    ],
+    "parserOptions": {
+        "ecmaVersion": 2021
+    },
+    "plugins": [],
+    "rules": {}
+}
+
+Step 14: Create .prettierrc file
+---
+{
+  "singleQuote": true,
+  "semi": false,
+  "tabWidth": 4,
+  "useTabs": false,
+  "printWidth": 80,
+  "endOfLine": "auto",
+  "trailingComma": "es5",
+  "bracketSpacing": true,
+  "vueIndentScriptAndStyle": true
+}
+
+Step 14: Install Vue Router
+---
+$ npm install vue-router@4
+
+Step 15: Vite Config path file to src
+---
+import { defineConfig } from 'vite'
+import vue from '@vitejs/plugin-vue'
+import eslintPLugin from "vite-plugin-eslint"
+import { fileURLToPath, URL } from 'url'
+
+// https://vitejs.dev/config/
+export default defineConfig({
+  resolve: {
+    alias: {
+      '@': fileURLToPath(new URL('./src', import.meta.url))
+    }
+  },
+  plugins: [vue(), eslintPLugin()]
+})
+
+Step 16: install @types/node
+---
+npm install -D @types/node
+
+Step 17: Create .env file
+---
+VITE_APP_TITLE=Vue Stock
+
+Step 18: Create .env.development  file
+---
+VITE_APP_URL=/
+VITE_APP_URL_API=https://laravel-backend-class.herokuapp.com/api/
+
+Step 19: Create .env.production  file
+---
+VITE_APP_URL=/vuestock
+VITE_APP_URL_API=https://laravel-backend-class.herokuapp.com/api/
+
+โครงสร้างโปรเจ็กต์ VUE-STOCK
+===============================
+vue-stock
+|   
++---.vscode
++---public
+|       
+\---src
+    |   App.vue
+    |   main.ts
+    |   vite-env.d.ts
+    +---assets  
+    +---components
+    |   +---backend
+    |   \---frontend
+    |           FrontendFoot.vue
+    |           FrontendNav.vue
+    +---layouts
+    |       FrontendLayout.vue
+    +---router
+    |       index.ts
+    +---tailwind
+    |       app.css
+    |       custom.css
+    \---views
+        +---backend
+        \---frontend
+                HomeView.vue          
+|   .env
+|   .env.development
+|   .env.production
+|   .eslintrc.json
+|   .gitignore
+|   .prettierrc
+|   index.html
+|   package-lock.json
+|   package.json
+|   postcss.config.cjs
+|   README.md
+|   tailwind.config.cjs
+|   tree.txt
+|   tsconfig.json
+|   tsconfig.node.json
+|   vite.config.ts
