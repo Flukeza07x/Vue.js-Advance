@@ -28,8 +28,37 @@
                           <li>
                             <router-link to="/services" class="transition-colors duration-200 text-gray-100 dark:text-white md:text-black hover:text-emerald-700">Service</router-link>
                         </li>
-                          <li>
+                          <li  @click="toggleDropdownMenu">
                             <router-link to="/features" class="transition-colors duration-200 text-gray-100 dark:text-white md:text-black hover:text-emerald-700">Features</router-link>
+                       
+                            <!-- Submenu -->
+                            <ul
+                                v-show="show"
+                                ref="target"
+                                class="
+                                md:absolute
+                                md:bg-white
+                                w-48 
+                                mt-2
+                                mx-auto
+                                bg-emerald-800
+                                rounded-md
+                                md:text-start 
+                                shadow-lg 
+                                ring-1 
+                                ring-black 
+                                ring-opacity-5">
+                                <li>
+                                    <a href="Incredible" class="md:text-black block px-4 py-2 md:hover:bg-gray-100">Incredible</a>
+                                </li>
+                                <li>
+                                    <a href="Fantastic" class="md:text-black block px-4 py-2 md:hover:bg-gray-100">Fantastic</a>
+                                </li>
+                                <li>
+                                    <a href="Intelligent" class="md:text-black block px-4 py-2 md:hover:bg-gray-100">Intelligent</a>
+                                </li>
+                             </ul>
+                       
                         </li>
                           <li>
                             <router-link to="/testimonials" class="transition-colors duration-200 text-gray-100 dark:text-white md:text-black hover:text-emerald-700">Testimonials</router-link>
@@ -40,12 +69,12 @@
                     
                           <li>
                             <router-link to="/getstarted">
-                         <button class="bg-emerald-600 hover:bg-emerald-700 transition-colors duration-300 py-2.5 px-5 rounded-lg text-white font-semibold">Get Started</button>
+                         <button class="bg-emerald-600 hover:bg-emerald-700 transition-colors duration-300 py-2.5 px-5 rounded-lg text-white font-semibold">Get Started ({{  count }})</button>
                          </router-link>
                         </li>
 
                         <li>
-                            <button class="px-4 py-2 text-black dark:text-white" @click="toggleDark()">{{isDark ? 'Light Mode' : 'Dark Mode'}}</button>
+                            <button class="px-4 py-2 text-black dark:text-white" @click="toggleDark()">{{ isDark ? 'Light' : 'Dark' }}</button>
                         </li>
                    </ul>
 
@@ -59,6 +88,19 @@
 <script setup lang="ts">
 
 import { ref } from 'vue';
+import { useDark, useToggle,onClickOutside  } from '@vueuse/core'
+
+//import counter.ts
+import { useCounterStore } from '../../store/counter'
+
+//Import Pinia
+import { storeToRefs, mapActions } from 'pinia'
+
+//Object store
+const store = useCounterStore()
+
+//หรือจะเขียนแบบ destructuring
+const { count } = storeToRefs(store)
 
     // Toggle Menu นะจ๊ะ
     const showmenu = ref(false)
@@ -67,11 +109,28 @@ import { ref } from 'vue';
 
     const toggleMenu = () => showmenu.value = !showmenu.value 
 
+    //toggle dropdown menu
+        const show = ref(false)
+
+        // Hide dropdown when click outside
+        const target = ref(null)
+
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        onClickOutside(target, event => {
+            // console.log(event)
+            show.value = false
+        })
+
+        //method toggle dropdown
+        const toggleDropdownMenu = () => show.value = !show.value
+
     //Dark mode
-    import { useDark, useToggle } from '@vueuse/core'
+    
 
     const isDark = useDark()
     const toggleDark = useToggle(isDark)
+
+    //
 
     </script>
 

@@ -1,0 +1,13 @@
+git rm -r --cached
+git rm --cached -r . //ลบ track ทั้งหมด ออกจาก git 
+git status //เช็วว่าไม่ได้ตาม track อะไร
+git add . //เพิ่มงานใน track
+git commit -m "" //เพิ่มเม้น
+git branch //เช็ค branch
+git branch ชื่อBranch //เพิ่ม branch
+git switch ชื่อ-branch //เปลี่ยน branch
+git remote origin URL-repository// รีโมทไป url
+git remote add origin URL-repository //เพิ่ม url
+git push -u origin ชื่อ-branch //เอาลง branch 
+git push --force origin ช่ื่อ branch //ลงทับไปเลยยย
+
