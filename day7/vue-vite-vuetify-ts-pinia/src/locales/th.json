@@ -1,0 +1,9 @@
+{
+    "languages": "ภาษา",
+    "menu_dashboard": "แดชบอร์ด",
+    "menu_product": "สินค้า",
+    "menu_order": "การสั่งซื้อ",
+    "menu_report": "รายงาน",
+    "menu_setting": "ตั้งค่าระบบ",
+    "menu_logout": "ออกจากระบบ"
+}
