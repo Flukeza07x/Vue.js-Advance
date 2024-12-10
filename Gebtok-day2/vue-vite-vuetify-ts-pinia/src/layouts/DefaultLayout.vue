@@ -48,6 +48,15 @@
       
        <v-spacer></v-spacer>
 
+      <!-- Notification Count -->
+       <v-btn class="text-none" stacked @click="clearCount">
+        <v-badge v-if="count.total > 0" color="error" :content="count.total">
+          <v-icon>mdi-store-outline</v-icon>
+        </v-badge>
+         <v-icon v-if="count.total <= 0">mdi-store-outline</v-icon>
+       </v-btn>
+       <!-- End Notification Count -->
+
       <v-menu open-on-click>
         
         <template v-slot:activator="{ props}">
@@ -78,14 +87,41 @@
 
 <script setup lang="ts">
 
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import { useTheme } from 'vuetify'
 import { useI18n } from 'vue-i18n';
 import { useRoute } from 'vue-router'
+import { db } from '../plugins/firebase'
+import router from '../router/index';
+
+const count: any = ref(0)
+
+//fetch Product Count
+onMounted(() => {
+  db.collection("product_count")
+  .onSnapshot((querySnapshot) =>{
+    count.value = querySnapshot.docs[0].data()
+    console.log(count.value.total);
+  })
+})
 
 // Get Meta Router
 const route = useRoute()
 // console.log(route.meta.header);
+
+//CLear Count Total
+const clearCount = () => {
+
+  //Push to product page
+  router.push('/product')
+
+  //Update total count in firebase
+  db.collection("product_count")
+  .doc('p_count')
+  .update({
+    total: 0
+  })
+}
 
 // Toggle Drawer
 const drawer = ref(true)

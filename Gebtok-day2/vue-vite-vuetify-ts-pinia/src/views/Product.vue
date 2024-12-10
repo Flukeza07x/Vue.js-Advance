@@ -100,6 +100,7 @@
 import { ref , onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { db } from '../plugins/firebase'
+import { tr } from 'vuetify/lib/locale/index.js';
 import { create } from 'domain';
 import { privateDecrypt } from 'crypto';
 
@@ -136,6 +137,8 @@ const product = ref({
     price: ''
 })
 
+//Const For count total Product add
+const count: any = ref(0)
 //Method Open add  Dialog 
 const OpenAddDialog = () => {
     dialog.value = true
@@ -181,9 +184,16 @@ onMounted(() => {
         products.value = []
         querySnapshot.forEach((doc) => {
             products.value.push(doc.data()) 
-             console.log(products.value[0])
+            //  console.log(products.value[0])
         })
     })  
+
+    //Count total new Product
+    db.collection("product_count")
+  .onSnapshot((querySnapshot) =>{
+    count.value = querySnapshot.docs[0].data()
+    // console.log(count.value.total);
+  })
 })
 
 
@@ -207,6 +217,15 @@ const addProduct = () => {
     //reset form
     product.value.name = ""
     product.value.price = ""
+
+    //Update total count
+    db.collection("product_count")
+    .doc('p_count')
+    .update({
+        total: count.value.total + 1
+    })
+  
+
 }
 
 // Update Prduct to firebase
