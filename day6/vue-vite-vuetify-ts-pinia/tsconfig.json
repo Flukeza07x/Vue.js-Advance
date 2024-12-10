@@ -1,0 +1,25 @@
+
+//Defalt อันเดิม
+// {
+//   "files": [],
+//   "references": [
+//     { "path": "./tsconfig.app.json" },
+//     { "path": "./tsconfig.node.json" }
+//   ]
+// }
+
+{
+  "files": [],
+  "references": [
+    { "path": "./tsconfig.app.json" },
+    { "path": "./tsconfig.node.json" }
+  ],
+  "compilerOptions": {
+    "baseUrl": ".", // กำหนดโฟลเดอร์ฐาน (root)
+    "paths": {
+      "@/*": ["src/*"] // Alias @ ชี้ไปยังโฟลเดอร์ src
+    }
+  }
+}
+
+
